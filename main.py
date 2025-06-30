@@ -6,9 +6,12 @@ contacts = [{
 }]
 
 def listContacts():
-  for i, contact in enumerate(contacts, start=1):
-      favorite = "★" if contact["favorite"] else "✩"
-      print(f"{favorite} {i} - {contact["name"]} ")
+  if (len(contacts) < 1):
+    print("Lista de contatos vazia!")
+  else:
+    for i, contact in enumerate(contacts, start=1):
+        favorite = "★" if contact["favorite"] else "✩"
+        print(f"{favorite} {i} - {contact["name"]} ")
 
 def createContact():
   name = input("Digite o nome do contato: ")
@@ -40,6 +43,14 @@ def edditContact(index):
     "favorite": contacts[correctIndex]["favorite"]
   }
 
+  print("Contato atualizado com sucesso!")
+
+def deleteContact(index):
+  correctIndex = index -1
+  deletedContact = contacts.pop(correctIndex)
+  print(f"O contato {deletedContact["name"]} foi deletado de sua lista de contatos")
+
+
 while True:
   print("\nLista de Contatos")
   print("1. Mostrar Contatos")
@@ -64,9 +75,13 @@ while True:
     toggleFavorite(toggleFavoriteIndex)
     print('\nLista de Contatos Atualizada: ')
     listContacts()
-  elif(chose == 4):
-    toggleEdditIndex = int(input("\nQual contato voce deseja editar: "))
+  elif(chose == 4): #Editar Contato
     listContacts()
+    toggleEdditIndex = int(input("\nQual contato voce deseja editar: "))
     edditContact(toggleEdditIndex)
     listContacts()
-
+  elif(chose == 5): #Excluir Contato
+    listContacts()
+    deleteIndex = int(input("\nQual contato voce deseja excluir: "))
+    deleteContact(deleteIndex)
+    listContacts()
